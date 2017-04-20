@@ -34,15 +34,20 @@ body {
 
 ----------
 
-## Janus: A front vs classification model
+## Janus: A simple front vs side classification model
 
-![alt text](https://upload.wikimedia.org/wikipedia/commons/d/db/Statue_of_Janus_%E5%82%91%E7%BA%B3%E5%A3%AB%E5%83%8F_-_panoramio.jpg "Logo Title Text 1")
+![alt text](https://upload.wikimedia.org/wikipedia/commons/d/db/Statue_of_Janus_%E5%82%91%E7%BA%B3%E5%A3%AB%E5%83%8F_-_panoramio.jpg "The Roman god Janus who faces backwards and forwards")
 
-Deep learning has great promise for automatically processing and classifying medical scans. To this end we open-source code to automatically determine if a given xray faces forwards (frontal) vs sideways (lateral).
+Deep learning has been used extensively to automatically process and classify medical scans. To this end we open-source code that automatically determines if a given xray faces forwards (frontal) vs sideways (lateral).
 
 # How it works
 
-Convolutional neural networks (convnets) use a hierarchy of filter banks to extract visual features as an input for a classifier.
+Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. In our model we use a convnet with two convolutional layers and two dense affine layers. 
+
+
+# Performance
+
+Our model acheives 99% accuracy and a log-loss of 0.1 compared to previous work. Our work is therefore comparable to previous work. However our model uses 2 convolutional layers instead of Googlenet which uses 22 convolutional layers and is therefore simplier.
 
 # Follow Us
 
@@ -64,5 +69,5 @@ Convolutional neural networks (convnets) use a hierarchy of filter banks to extr
 
 [1]: https://twitter.com/isaziconsulting
 [2]: https://www.facebook.com/Isazi-Consulting-240193656434498/
-[3]: https://github.com/isaziconsulting<style>
+[3]: https://github.com/isaziconsulting
 
