@@ -44,10 +44,11 @@ Deep learning has been used extensively to automatically process and classify me
 
 Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. In our model we use a convnet with two convolutional layers and two dense affine layers. 
 
+To find weights for filter banks that extract good features we train out model on 173 manually labelled images. As a loss function we use binary cross-entropy and the Adam as our gradient descent optimiser. 
 
 # Performance
 
-Our model acheives 99% accuracy and a log-loss of 0.1 compared to previous work. Our work is therefore comparable to previous work. However our model uses 2 convolutional layers instead of Googlenet which uses 22 convolutional layers and is therefore simplier.
+Our model acheives 99% accuracy and a log-loss of 0.1 compared to previous work which achieves accuracy and . Our work is therefore comparable to previous work but with fewer parameters. Our model uses 2 convolutional layers instead of Googlenet which uses 22 convolutional layers and is therefore both more memory and computationally efficient.
 
 # Follow Us
 
