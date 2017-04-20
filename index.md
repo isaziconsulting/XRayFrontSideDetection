@@ -1,9 +1,3 @@
-## Janus
-
-![alt text](https://upload.wikimedia.org/wikipedia/commons/d/db/Statue_of_Janus_%E5%82%91%E7%BA%B3%E5%A3%AB%E5%83%8F_-_panoramio.jpg "Logo Title Text 1")
-
-
-
 <style>
 table{
     border-collapse: collapse;
@@ -40,9 +34,15 @@ body {
 
 ----------
 
+## Janus: A front vs classification model
 
+![alt text](https://upload.wikimedia.org/wikipedia/commons/d/db/Statue_of_Janus_%E5%82%91%E7%BA%B3%E5%A3%AB%E5%83%8F_-_panoramio.jpg "Logo Title Text 1")
 
+Deep learning has great promise for automatically processing and classifying medical scans. To this end we open-source code to automatically determine if a given xray faces forwards (frontal) vs sideways (lateral).
 
+# How it works
+
+Convolutional neural networks (convnets) use a hierarchy of filter banks to extract visual features as an input for a classifier.
 
 # Follow Us
 
