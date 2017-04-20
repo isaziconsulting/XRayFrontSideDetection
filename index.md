@@ -37,7 +37,8 @@ body {
   </tr>
 </table>
 
-</br>
+</br >
+
 ----------
 
 
@@ -93,12 +94,8 @@ body {
 <table align="right">
   <tr>
     <td><b>Author:</b></td>
-    <td>Devin Taylor</td>
-  </tr>
-  <!--<tr>
-    <td></td>
     <td>Jason Perlow</td>
-  </tr>-->
+  </tr>
 </table>
 
 <br />
