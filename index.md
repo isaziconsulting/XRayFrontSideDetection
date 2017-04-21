@@ -61,9 +61,9 @@ Here is a confusion matrix of front vs side classifications:
 |                   | Real frontal  | Real lateral  |
 |:-------------:    | ------------- |:-------------:|
 | Predicted frontal | 1             | 1             |
-| Predicted frontal | 1             | 1             |
+| Predicted lateral | 1             | 1             |
 
-Since we're dealing with data that has binary classes there is a trade-off between depending on our threshold. To quantify the continuum of these values we plot a ROC curve:
+Since we're dealing with data that has binary classes there is a trade-off between false positive rate and false negative rate depending on our threshold. To quantify the continuum of these values we plot a ROC curve:
 
 # Follow Us
 
