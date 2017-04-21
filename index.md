@@ -40,15 +40,17 @@ body {
 
 Deep learning has been used extensively to automatically process and classify medical scans. As contribution to this field we open-source code that automatically determines if a given xray faces forwards (frontal) vs sideways (lateral) using convolutional neural networks.
 
+![alt text](assets/frontandside.jpg "lateral and frontal xrays")
+
 # How it works
 
 Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Our model uses a convnet with four convolutional layers and two dense affine layers. For our model we adopt the structure of the VGG model which pools after every two convolutional layers.
 
-To find weights for filter banks that extract good features . As a loss function we use binary cross-entropy and the Adam as our gradient descent optimiser. 
+To find weights for filter banks that extract good features . As a loss function we use binary cross-entropy and the Adam as our gradient descent optimiser.
 
 # Data
 
-Our data is the open Montgomary database. We manually labelled 173 frontal and 123 lateral images. We rescaled xrays to 128x128 px images. We augmented the data by rotating images in the range of -30 degrees to +30 degrees.
+Our data is the open Montgomary database. We manually labeled 173 frontal and 123 lateral images. We rescaled xrays to 128x128 px images. We augmented the data by rotating images in the range of -30 degrees to +30 degrees.
 
 # Performance
 
@@ -75,4 +77,3 @@ Our model acheives 99% accuracy and a log-loss of 0.1 compared to previous work 
 [1]: https://twitter.com/isaziconsulting
 [2]: https://www.facebook.com/Isazi-Consulting-240193656434498/
 [3]: https://github.com/isaziconsulting
-
