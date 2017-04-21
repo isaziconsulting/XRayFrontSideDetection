@@ -49,14 +49,14 @@ Convolutional neural networks (convnets) are a deep learning technique that use 
 
 To find weights for filter banks that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given x-ray. The extent to which a prediction is correct is measured using a loss function. As a loss function we use binary cross-entropy. To adjust weights we used ADAM, a gradient descent optimiser.
 
-accuracy during training
+valuation accuracy during training
 
 <center>
     <img src="assets/acc.png" alt="X-Ray containing sensitive information" style="width: 400px;"/>
     <figcaption style="font-size: 9pt">accuracy over 100 iterations</figcaption>
 </center>
 
-loss during training
+valuation loss during training
 
 <center>
     <img src="assets/loss.png" alt="X-Ray containing sensitive information" style="width: 400px;"/>
@@ -78,10 +78,11 @@ Our model achieves a false positive rate of 1% and true positive rate of 1%. We 
 
 Here is a confusion matrix of front vs side classifications:
 
-|                   | Real frontal  | Real lateral  |
-|:-------------:    | ------------- |:-------------:|
-| Predicted frontal | 1             | 1             |
-| Predicted lateral | 1             | 1             |
+
+|                   | Actual frontal | Actual lateral |
+|:-------------:    | -------------  |:--------------:|
+| Predicted frontal | 1              | 1              |
+| Predicted lateral | 1              | 1              |
 
 Since we're dealing with data that has binary classes there is a trade-off between false positive rate and false negative rate depending on our threshold. To quantify the continuum of these values we plot a ROC curve:
 
