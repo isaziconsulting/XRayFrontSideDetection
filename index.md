@@ -34,31 +34,43 @@ body {
 
 ----------
 
-## Agni: A simple front vs side xray classification model
+## Agni: A simple front vs side x-ray classification model
 
-![alt text](https://upload.wikimedia.org/wikipedia/commons/f/fe/Agni_god_of_fire.jpg "Agni: the Hindu deity of fire")
-*The Hindu deity Agni*
+<center>
+    <img src="assets/Agni.jpg" alt="The Hindu deity Agni: One of the guardian deities of direction" style="width: 400px;"/>
+    <figcaption style="font-size: 9pt">The Hindu deity Agni: One of the guardian deities of direction (<i>wikimedia commons</i>)</figcaption>
+</center>
 
-Deep learning has been used extensively to automatically process and classify medical scans. As a contribution to this field we open-source a simple yet accurate model that automatically determines if a given xray faces forwards (frontal) vs sideways (lateral).
+Deep learning has been used extensively to automatically process and classify medical scans. As a contribution to this field we open-source a simple yet accurate model that automatically determines if a given x-ray faces forwards (frontal) vs sideways (lateral).
 
 # How it works
 
 Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Agni is a convnet with four convolutional layers and two dense affine layers. In particular our architecture is based on the widely used VGG model where pooling (downsampling) occurs after every two convolutional layers.
 
-To find weights for filter banks that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given xray. The extent to which a prediction is correct is measured using a loss function. As a loss function we use binary cross-entropy. To adjust weights we used ADAM, a gradient descent optimiser.
+To find weights for filter banks that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given x-ray. The extent to which a prediction is correct is measured using a loss function. As a loss function we use binary cross-entropy. To adjust weights we used ADAM, a gradient descent optimiser.
 
-![alt text](assets/acc.png "accuracy")
-*accuracy over 100 iterations*
+accuracy during training
 
-![alt text](assets/loss.png "loss")
-*loss over 100 iterations*
+<center>
+    <img src="assets/acc.png" alt="X-Ray containing sensitive information" style="width: 400px;"/>
+    <figcaption style="font-size: 9pt">accuracy over 100 iterations</figcaption>
+</center>
+
+loss during training
+
+<center>
+    <img src="assets/loss.png" alt="X-Ray containing sensitive information" style="width: 400px;"/>
+    <figcaption style="font-size: 9pt">loss over 100 iterations</figcaption>
+</center>
 
 # Data
 
-Our data is the open Montgomary database. We manually labeled 173 frontal and 123 lateral images. We rescaled xrays to 128x128 px images. We augmented the data by rotating images in the range of -30 degrees to +30 degrees and flipping them along their vertical axis.
+Our data is the open [Montgomery County chest x-ray set](http://archive.nlm.nih.gov/repos/chestImages.php) database. We manually labeled 173 frontal and 123 lateral images. We rescaled x-rays to 128x128 px images. We augmented the data by rotating images in the range of -30 degrees to +30 degrees and flipping them along their vertical axis.
 
-![alt text](assets/frontandside.jpg "lateral and frontal xrays")
-*Sample xrays from the Mongomery dataset*
+<center>
+    <img src="assets/frontandside.jpg" alt="Sample x-rays from the Mongomery dataset" style="width: 400px;"/>
+    <figcaption style="font-size: 9pt">Sample x-rays from the Mongomery dataset</figcaption>
+</center>
 
 # Performance
 
@@ -75,7 +87,7 @@ Since we're dealing with data that has binary classes there is a trade-off betwe
 
 # Future extensions
 
-This project can easily be extended to an arbitrary binary image classifier. Feel free to fork this project and classify your own data!
+This project can easily be extended to an arbitrary binary medical scan classifier (PET scan slides, MRIs slides, ...). Feel free to fork this project and classify your own data!
 
 # Follow Us
 
