@@ -34,9 +34,9 @@ body {
 
 ----------
 
-## Janus: A simple front vs side classification model
+## Agni: A simple front vs side classification model
 
-![alt text](https://upload.wikimedia.org/wikipedia/commons/d/db/Statue_of_Janus_%E5%82%91%E7%BA%B3%E5%A3%AB%E5%83%8F_-_panoramio.jpg "The Roman god Janus who faces backwards and forwards")
+![alt text](https://upload.wikimedia.org/wikipedia/commons/f/fe/Agni_god_of_fire.jpg "Agni: the Hindu god of fire")
 
 Deep learning has been used extensively to automatically process and classify medical scans. To this end we open-source code that automatically determines if a given xray faces forwards (frontal) vs sideways (lateral).
 
