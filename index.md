@@ -38,15 +38,15 @@ body {
 
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/f/fe/Agni_god_of_fire.jpg "Agni: the Hindu god of fire")
 
-Deep learning has been used extensively to automatically process and classify medical scans. As contribution to this field we open-source code that automatically determines if a given xray faces forwards (frontal) vs sideways (lateral) using convolutional neural networks.
+Deep learning has been used extensively to automatically process and classify medical scans. As contribution to this field we open-source a simple yet accurate model that automatically determines if a given xray faces forwards (frontal) vs sideways (lateral).
 
 ![alt text](assets/frontandside.jpg "lateral and frontal xrays")
 
 # How it works
 
-Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Our model uses a convnet with four convolutional layers and two dense affine layers. For our model we adopt the structure of the VGG model which pools after every two convolutional layers.
+Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Agni is a convnet with four convolutional layers and two dense affine layers. This structure is based on the widely used VGG model which pools after every two convolutional layers.
 
-To find weights for filter banks that extract good features . As a loss function we use binary cross-entropy and the Adam as our gradient descent optimiser.
+To find weights for filter banks that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given xray. The extent to which a prediction is correct is measured using a loss function. As a loss function we use binary cross-entropy. To adjust weights we used ADAM as a gradient descent optimiser.
 
 # Data
 
