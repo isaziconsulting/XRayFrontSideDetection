@@ -54,7 +54,16 @@ Our data is the open Montgomary database. We manually labeled 173 frontal and 12
 
 # Performance
 
-Our model acheives 99% accuracy and a log-loss of 0.1 compared to previous work which achieves accuracy and . Our work is therefore comparable to previous work but with fewer parameters. Our model uses 2 convolutional layers instead of Googlenet which uses 22 convolutional layers and is therefore both more memory and computationally efficient.
+Our model achieves a false positive rate of 1% and false negative rate of 1% a log-loss of 0.1 compared to previous work which achieves accuracy and . Our work is therefore comparable to previous work but with fewer parameters. Our model uses 2 convolutional layers instead of Googlenet which uses 22 convolutional layers and is therefore both more memory and computationally efficient.
+
+Here is a confusion matrix of front vs side classifications:
+
+|                   | Real frontal  | Real lateral  |
+|:-------------:    | ------------- |:-------------:|
+| Predicted frontal | 1             | 1             |
+| Predicted frontal | 1             | 1             |
+
+Since we're dealing with data that has binary classes there is a trade-off between depending on our threshold. To quantify the continuum of these values we plot a ROC curve:
 
 # Follow Us
 
