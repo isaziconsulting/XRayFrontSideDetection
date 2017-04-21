@@ -34,13 +34,15 @@ body {
 
 ----------
 
-## Agni: A simple front vs side classification model
+## Agni: A simple front vs side xray classification model
 
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/f/fe/Agni_god_of_fire.jpg "Agni: the Hindu god of fire")
+*The Hindu god Agni*
 
 Deep learning has been used extensively to automatically process and classify medical scans. As contribution to this field we open-source a simple yet accurate model that automatically determines if a given xray faces forwards (frontal) vs sideways (lateral).
 
 ![alt text](assets/frontandside.jpg "lateral and frontal xrays")
+*Sample xrays from the Mongomery dataset*
 
 # How it works
 
@@ -50,11 +52,11 @@ To find weights for filter banks that extract good features, weights are iterati
 
 # Data
 
-Our data is the open Montgomary database. We manually labeled 173 frontal and 123 lateral images. We rescaled xrays to 128x128 px images. We augmented the data by rotating images in the range of -30 degrees to +30 degrees.
+Our data is the open Montgomary database. We manually labeled 173 frontal and 123 lateral images. We rescaled xrays to 128x128 px images. We augmented the data by rotating images in the range of -30 degrees to +30 degrees and flipping them along their vertical axis.
 
 # Performance
 
-Our model achieves a false positive rate of 1% and false negative rate of 1% a log-loss of 0.1 compared to previous work which achieves accuracy and . Our work is therefore comparable to previous work but with fewer parameters. Our model uses 2 convolutional layers instead of Googlenet which uses 22 convolutional layers and is therefore both more memory and computationally efficient.
+Our model achieves a false positive rate of 1% and true positive rate of 1%. We also achieved a log-loss of 0.1 compared to previous work which achieves a false positive rate of and a true positive rate of . Our work is therefore comparable to previous work but is much simpler. Our model uses 2 convolutional layers instead of Googlenet which uses 22 convolutional layers and is therefore both more memory and computationally efficient.
 
 Here is a confusion matrix of front vs side classifications:
 
