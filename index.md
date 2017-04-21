@@ -36,23 +36,29 @@ body {
 
 ## Agni: A simple front vs side xray classification model
 
-![alt text](https://upload.wikimedia.org/wikipedia/commons/f/fe/Agni_god_of_fire.jpg "Agni: the Hindu god of fire")
-*The Hindu god Agni*
+![alt text](https://upload.wikimedia.org/wikipedia/commons/f/fe/Agni_god_of_fire.jpg "Agni: the Hindu deity of fire")
+*The Hindu deity Agni*
 
-Deep learning has been used extensively to automatically process and classify medical scans. As contribution to this field we open-source a simple yet accurate model that automatically determines if a given xray faces forwards (frontal) vs sideways (lateral).
-
-![alt text](assets/frontandside.jpg "lateral and frontal xrays")
-*Sample xrays from the Mongomery dataset*
+Deep learning has been used extensively to automatically process and classify medical scans. As a contribution to this field we open-source a simple yet accurate model that automatically determines if a given xray faces forwards (frontal) vs sideways (lateral).
 
 # How it works
 
-Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Agni is a convnet with four convolutional layers and two dense affine layers. This structure is based on the widely used VGG model which pools after every two convolutional layers.
+Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Agni is a convnet with four convolutional layers and two dense affine layers. In particular our architecture is based on the widely used VGG model where pooling (downsampling) occurs after every two convolutional layers.
 
-To find weights for filter banks that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given xray. The extent to which a prediction is correct is measured using a loss function. As a loss function we use binary cross-entropy. To adjust weights we used ADAM as a gradient descent optimiser.
+To find weights for filter banks that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given xray. The extent to which a prediction is correct is measured using a loss function. As a loss function we use binary cross-entropy. To adjust weights we used ADAM, a gradient descent optimiser.
+
+![alt text](assets/acc.png "accuracy")
+*accuracy over 100 iterations*
+
+![alt text](assets/loss.png "loss")
+*loss over 100 iterations*
 
 # Data
 
 Our data is the open Montgomary database. We manually labeled 173 frontal and 123 lateral images. We rescaled xrays to 128x128 px images. We augmented the data by rotating images in the range of -30 degrees to +30 degrees and flipping them along their vertical axis.
+
+![alt text](assets/frontandside.jpg "lateral and frontal xrays")
+*Sample xrays from the Mongomery dataset*
 
 # Performance
 
@@ -66,6 +72,10 @@ Here is a confusion matrix of front vs side classifications:
 | Predicted lateral | 1             | 1             |
 
 Since we're dealing with data that has binary classes there is a trade-off between false positive rate and false negative rate depending on our threshold. To quantify the continuum of these values we plot a ROC curve:
+
+# Future extensions
+
+This project can easily be extended to an arbitrary binary image classifier. Feel free to fork this project and classify your own data!
 
 # Follow Us
 
