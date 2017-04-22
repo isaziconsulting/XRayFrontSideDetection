@@ -41,7 +41,7 @@ body {
     <figcaption style="font-size: 9pt">The Hindu deity Agni: One of the guardian deities of direction (<i>wikimedia commons</i>)</figcaption>
 </center>
 
-Deep learning has been used extensively to automatically process and classify medical scans. As a contribution to this field we open-source a simple yet accurate model that automatically determine if a patient is facing forwards (frontal) or sideways (lateral) in a given x-ray.
+Deep learning has been used extensively to automatically process and classify medical scans. As a contribution to this field we open-source a simple yet accurate model that automatically determines if a patient is facing forwards (frontal) or sideways (lateral) in a given x-ray.
 
 # Data
 
@@ -59,7 +59,7 @@ Convolutional neural networks (convnets) are a deep learning technique that use 
 
 To find weights for filter banks that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given x-ray. The extent to which a prediction is correct is measured using a loss function. As a loss function we use binary cross-entropy. To adjust weights we used [Adam](https://arxiv.org/abs/1412.6980), a gradient descent optimiser.
 
-A 100 iterations/epochs of training were suffient for our model to converge.
+A 100 iterations/epochs of training were sufficient for our model to converge.
 
 <center>
     <img src="assets/acc.png" alt="X-Ray containing sensitive information" style="width: 350px;"/>
