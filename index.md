@@ -82,8 +82,8 @@ Here is a confusion matrix of front vs side classifications:
 <caption style="font-size: 9pt">Confusion matrix</caption>
   <tr>
     <th></th>
-    <th><p><b>Actual frontal</b></p></th>
-    <th><p><b>Actual lateral</b></p></th>
+    <th><p><b>True frontal</b></p></th>
+    <th><p><b>True lateral</b></p></th>
   </tr>
   <tr>
     <td><p><b>Predicted frontal</b></p></td>
@@ -91,7 +91,7 @@ Here is a confusion matrix of front vs side classifications:
     <td><p>1</p></td>
   </tr>
   <tr>
-    <td><p><b>Predicted frontal</b></p></td>
+    <td><p><b>Predicted lateral</b></p></td>
     <td><p>1</p></td>
     <td><p>1</p></td>
   </tr>
