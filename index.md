@@ -41,11 +41,11 @@ body {
     <figcaption style="font-size: 9pt">The Hindu deity Agni: One of the guardian deities of direction (<i>wikimedia commons</i>)</figcaption>
 </center>
 
-Deep learning has been used extensively to automatically process and classify medical scans. As a contribution to this field we open-source a simple yet accurate model that automatically determines if a patient is facing forwards (frontal) or sideways (lateral) in a given x-ray.
+Deep learning has been used extensively to automatically process and classify medical scans. As a contribution to this field we open-source Agni, a simple yet accurate model that automatically determines if a given patient x-ray is facing forwards (frontal) or sideways (lateral).
 
 # Data
 
-As data we use the open [Montgomery County chest x-ray database](http://archive.nlm.nih.gov/repos/chestImages.php). Since this data doesn't have patient orientation information we manually labeled 173 frontal and 123 lateral images. To make the data suitable for neural networks we rescaled x-rays to 128x128 px. Since we have so little data we synthesised more the data by randomly rotating images in the range of -30 degrees to +30 degrees and flipping them along their vertical axis.
+As data we use the open [Montgomery County chest x-ray database](http://archive.nlm.nih.gov/repos/chestImages.php). Since this data doesn't have patient orientation information we manually labeled 173 frontal and 123 lateral images. To allow for a smaller neural network we rescaled x-rays to 128x128 px. Since we have few training samples we synthesised more the data by randomly rotating images in the range of -30 degrees to +30 degrees and flipping them along their vertical axis.
 
 <center>
     <img src="assets/frontandside.jpg" alt="Sample x-rays from the Mongomery dataset" style="width: 400px;"/>
@@ -55,23 +55,22 @@ As data we use the open [Montgomery County chest x-ray database](http://archive.
 
 # How it works
 
-Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Agni is a convnet with four convolutional layers and two dense affine layers. In particular our architecture is based on the widely used VGG model where pooling (downsampling) occurs after every two convolutional layers.
+Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Structurally Agni is a convnet with four convolutional layers and two dense affine layers. In particular our architecture is based on the widely used VGG model where pooling (downsampling) occurs after every two convolutional layers.
 
-To find weights for filter banks that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given x-ray. The extent to which a prediction is correct is measured using a loss function. As a loss function we use binary cross-entropy. To adjust weights we used [Adam](https://arxiv.org/abs/1412.6980), a gradient descent optimiser.
+To find filter bank weights that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given x-ray and orientation label pair. The extent to which a prediction is correct is measured using a loss function. Since our problem has two classes (frontal and lateral), we use binary cross-entropy loss. To adjust weights such that loss is minimised we use [Adam](https://arxiv.org/abs/1412.6980), a modern gradient descent optimiser.
 
-A 100 iterations/epochs of training were sufficient for our model to converge.
+A 100 iterations/epochs of training were sufficient for our model to converge to a near zero valuation loss:
 
-<center>
-    <img src="assets/acc.png" alt="X-Ray containing sensitive information" style="width: 350px;"/>
-    <figcaption style="font-size: 9pt">Valuation accuracy during training (smoothed curve in bold).</figcaption>
-</center>
+<p style="float: left; font-size: 9pt; text-align: center; width: 48%; margin-right: 1%; margin-bottom: 0.5em;">
+  <img src="assets/acc.png" style="width: 100%"/>
+  Valuation accuracy during training (smoothed curve in bold).
+</p>
 
-valuation loss during training
+<p style="float: right; font-size: 9pt; text-align: center; width: 48%; margin-right: 1%; margin-bottom: 0.5em;">
+  <img src="assets/loss.png" style="width: 100%"/>
+  Valuation loss over 100 iterations (smoothed curve in bold)</p>
+<p style="clear: both;"/>
 
-<center>
-    <img src="assets/loss.png" alt="X-Ray containing sensitive information" style="width: 350px;"/>
-    <figcaption style="font-size: 9pt">Valuation loss over 100 iterations</figcaption>
-</center>
 
 # Performance
 
@@ -79,11 +78,25 @@ Our model achieves a false positive rate of 1% and true positive rate of 99%. We
 
 Here is a confusion matrix of front vs side classifications:
 
+<table align="center" style="width:75%;font-size: 11pt">
+<caption style="font-size: 9pt">Confusion matrix</caption>
+  <tr>
+    <th></th>
+    <th><p><b>Actual frontal</b></p></th>
+    <th><p><b>Actual lateral</b></p></th>
+  </tr>
+  <tr>
+    <td><p><b>Predicted frontal</b></p></td>
+    <td><p>1</p></td>
+    <td><p>1</p></td>
+  </tr>
+  <tr>
+    <td><p><b>Predicted frontal</b></p></td>
+    <td><p>1</p></td>
+    <td><p>1</p></td>
+  </tr>
+</table>
 
-|                   | Actual frontal | Actual lateral |
-|:-------------:    | -------------  |:--------------:|
-| Predicted frontal | 1              | 1              |
-| Predicted lateral | 1              | 1              |
 
 Since we're dealing with data that has binary classes there is a trade-off between false positive rate and false negative rate depending on our threshold. To quantify the continuum of these values we plot a ROC curve:
 
