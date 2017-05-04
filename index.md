@@ -45,7 +45,7 @@ Deep learning has been used extensively to automatically process and classify me
 
 # Data
 
-As data we use the open [Montgomery County chest x-ray database](http://archive.nlm.nih.gov/repos/chestImages.php). Since this data doesn't have patient orientation information we manually labeled 173 frontal and 123 lateral images. To allow for a smaller neural network we rescaled x-rays to 128x128 px. Since we have few training samples we synthesised more the data by randomly rotating images in the range of -30 degrees to +30 degrees and flipping them along their vertical axis.
+As data we use the open [Montgomery County chest x-ray database](http://archive.nlm.nih.gov/repos/chestImages.php). Since this data doesn't have patient orientation information we manually labeled a subset of the data yielding 149 frontal and 101 lateral images. To allow for a neural network with fewer parameters we rescaled x-rays to 128x128 px. Since we have few training samples we synthesised more the data by randomly rotating images in the range of -5 degrees to +5 degrees and flipping them along their vertical axis.
 
 <center>
     <img src="assets/frontandside.jpg" alt="Sample x-rays from the Mongomery dataset" style="width: 400px;"/>
@@ -55,26 +55,27 @@ As data we use the open [Montgomery County chest x-ray database](http://archive.
 
 # How it works
 
-Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Structurally Agni is a convnet with four convolutional layers and two dense affine layers. In particular our architecture is based on the widely used VGG model where pooling (downsampling) occurs after every two convolutional layers.
+Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Structurally Agni is a convnet with four convolutional layers and two dense affine layers. In particular our architecture is based on the widely used VGG model where each model "block" has two convolutional layers with the same number of filters followed a pooling (downsampling) layer. We also use [batch normalization](https://arxiv.org/abs/1502.03167) between layers to allow us to be less careful about initialisation and improve training speed. Agni also includes dropout in the last affine layer to regularise parameters to reduce over-fitting.
 
-To find filter bank weights that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given x-ray and orientation label pair. The extent to which a prediction is correct is measured using a loss function. Since our problem has two classes (frontal and lateral), we use binary cross-entropy loss. To adjust weights such that loss is minimised we use [Adam](https://arxiv.org/abs/1412.6980), a modern gradient descent optimiser.
+To find weights that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given x-ray and orientation label pair. The extent to which a prediction is correct is measured using a loss function. Since our problem has two classes (frontal and lateral), we use binary cross-entropy loss. To adjust weights such that loss is minimised we use [Adam](https://arxiv.org/abs/1412.6980), a modern gradient descent optimiser.
 
-A 100 iterations/epochs of training were sufficient for our model to converge to a near zero valuation loss:
+We visualise the training process using [tensorboard](https://www.tensorflow.org/get_started/summaries_and_tensorboard). 100 iterations/epochs of training were sufficient for our model to converge to a near zero valuation loss:
 
 <p style="float: left; font-size: 9pt; text-align: center; width: 48%; margin-right: 1%; margin-bottom: 0.5em;">
   <img src="assets/acc.png" style="width: 100%"/>
-  Valuation accuracy during training (smoothed curve in bold).
+  Valuation accuracy over 100 iterations.
 </p>
 
 <p style="float: right; font-size: 9pt; text-align: center; width: 48%; margin-right: 1%; margin-bottom: 0.5em;">
   <img src="assets/loss.png" style="width: 100%"/>
-  Valuation loss over 100 iterations (smoothed curve in bold)</p>
+  Valuation loss over 100 iterations</p>
 <p style="clear: both;"/>
 
+Note that Agni has a nice steadily decreasing validation loss curve without any upward jumps.
 
 # Performance
 
-Our model achieves a false positive rate of 1% and true positive rate of 99%. We also achieved a log-loss of 0.1 compared to previous work which achieves a false positive rate of and a true positive rate of . Our work is therefore comparable to previous work but is much simpler. Our model uses 2 convolutional layers instead of Googlenet which uses 22 convolutional layers and is therefore both more memory and computationally efficient.
+Our model achieves a 0% false positive rate and 100% true positive rate in the test set of 50 images. We also achieved a log-loss of 0.019. Our work is therefore comparable to previous work but is much simpler. Our model uses a total of 6 layers and a total of around 650 k parameters compared to previous work using Googlenet which uses 22 layers and a total of 6.7 M parameters. Agni is therefore both more memory and computationally efficient previous approaches.
 
 Here is a confusion matrix of front vs side classifications:
 
@@ -99,6 +100,10 @@ Here is a confusion matrix of front vs side classifications:
 
 
 Since we're dealing with data that has binary classes there is a trade-off between false positive rate and false negative rate depending on our threshold. To quantify the continuum of these values we plot a ROC curve:
+
+# Code
+
+Our repo is arranged into source (`src`) and data (`data`) folders. The `src` folder has two files, one for training and another for testing. Please refer to the `README.md` file in the repo for further details.
 
 # Future extensions
 
