@@ -41,11 +41,11 @@ body {
     <figcaption style="font-size: 9pt">The Hindu deity Agni: One of the guardian deities of direction (<i>wikimedia commons</i>)</figcaption>
 </center>
 
-Deep learning has been used extensively to automatically process and classify medical scans. As a contribution to this field we open-source Agni, a simple yet accurate model that automatically determines if a given patient x-ray is facing forwards (frontal) or sideways (lateral).
+Deep learning has been used extensively to automatically process and classify medical scans. As a contribution to this field we open-source Agni, a simple yet accurate model that automatically determines if a given patient x-ray is facing forwards (frontal) or sideways (lateral). According to [Rajkomar et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5267603/) this problem is important because metadata formatting for orientation from different x-ray machines can be inconsistent and sometimes even non-existent.
 
 # Data
 
-As data we use the open [Montgomery County chest x-ray database](http://archive.nlm.nih.gov/repos/chestImages.php). Since this data doesn't have patient orientation information we manually labeled a subset of the data yielding 149 frontal and 101 lateral images. To allow for a neural network with fewer parameters we rescaled x-rays to 128x128 px. Since we have few training samples we synthesised more the data by randomly rotating images in the range of -5 degrees to +5 degrees, shifting them by 0.05 % alonf thier hirzontal and vertical axes as well as flipping them along their vertical axis.
+As data we use the open [Montgomery County chest x-ray database](http://archive.nlm.nih.gov/repos/chestImages.php). Since this data doesn't have patient orientation information we manually labeled a subset of the data yielding 149 frontal and 101 lateral images. To allow for a neural network with fewer parameters we rescaled x-rays to 128x128 px. Since we have few training samples we synthesised more the data by randomly rotating images in the range of -5 degrees to +5 degrees, shifting them by 0.05 % along their horizontal and vertical axes as well as flipping them along their vertical axis.
 
 <center>
     <img src="assets/frontandside.jpg" alt="Sample x-rays from the Mongomery dataset" style="width: 400px;"/>
@@ -57,7 +57,7 @@ As data we use the open [Montgomery County chest x-ray database](http://archive.
 
 ## Architecture
 
-Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Structurally Agni is a convnet with four convolutional layers and two dense affine layers. In particular our architecture is based on the widely used VGG model where each model "block" has two convolutional layers with the same number of filters followed a pooling (downsampling) layer. We also use [batch normalization](https://arxiv.org/abs/1502.03167) between layers to allow us to be less careful about initialisation and improve training speed. Agni also includes dropout in the last affine layer to regularise parameters to reduce over-fitting.
+Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Structurally Agni is a convnet with four convolutional layers and two dense affine layers. In particular our architecture is based on the widely used VGG model where each model "block" has two convolutional layers with the same number of filters followed a pooling (downsampling) layer. We also use [batch normalization](https://arxiv.org/abs/1502.03167) between layers to allow us to be less careful about initialisation and improve training speed and regularise parameters to reduce over-fitting.
 
 ## Training
 
@@ -75,7 +75,7 @@ We visualise the training process using [tensorboard](https://www.tensorflow.org
   Valuation loss over 100 iterations</p>
 <p style="clear: both;"/>
 
-Note that Agni has a nice steadily decreasing validation loss curve without many upward jumps. Our model took about 35 mins on a quad core CPU so our experiments can be replicated by anyone with access to modern consumer grade hardware.
+Note that Agni has a nice steadily decreasing validation loss curve without many upward jumps. Our model took about 23 mins to train on a quad core CPU so our experiments can be replicated by anyone with access to modern consumer grade hardware.
 
 # Performance
 
@@ -106,7 +106,7 @@ Here is a confusion matrix of front vs side classifications:
 
 ## Comparison to related work
 
-Previous work on front vs. side x-ray detection by [Rajkomar et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5267603/) used pretrained models to achive near perfect accuracy. Our work is therefore comparable to previous work but is much simpler. Our model uses a total of 6 layers and a total of around 650 k parameters compared to previous work using Googlenet which uses 22 layers and a total of 6.7 M parameters. Agni is therefore both more memory and computationally efficient previous approaches.
+Previous work on front vs. side x-ray detection by [Rajkomar et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5267603/) used pretrained models to achieve near perfect accuracy. Our work is therefore comparable to previous work but is much simpler. Our model uses a total of 6 layers and a total of around 650 k parameters compared to previous work using Googlenet which uses 22 layers and a total of 6.7 M parameters. Agni is therefore both more memory and computationally efficient than previous approaches.
 
 # Code
 
@@ -114,7 +114,7 @@ Our repo is arranged into source (`src`) and data (`data`) folders. The `src` fo
 
 # Future work
 
-Feel free to mess around with our parameters. See if you can delete some layers to make the model even simpler.
+Go ahead and mess around with our model parameters. See if you can delete some layers to make the model even simpler.
 
 This project can easily be modified to become an arbitrary binary medical scan classifier (PET scan slides, MRIs slides, ...). Feel free to fork this project and classify your own data!
 
