@@ -57,13 +57,13 @@ As data we use the open [Montgomery County chest x-ray database](http://archive.
 
 ## Architecture
 
-Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Structurally Agni is a convnet with four convolutional layers and two dense affine layers. In particular our architecture is based on the widely used VGG model where each model "block" has two convolutional layers with the same number of filters followed a pooling (downsampling) layer. We also use [batch normalization](https://arxiv.org/abs/1502.03167) between layers to allow us to be less careful about initialisation and improve training speed and regularise parameters to reduce over-fitting.
+Convolutional neural networks (convnets) are a deep learning technique that use a hierarchy of filter banks to extract visual features as an input for a classifier. Structurally Agni is a convnet with four convolutional layers and two dense affine layers. In particular our architecture is based on the widely used VGG model where each model "block" has two convolutional layers with each with the same number of filters followed a pooling (downsampling) layer. We also use [batch normalization](https://arxiv.org/abs/1502.03167) between layers to allow us to be less careful about initialisation and improve training speed and regularise parameters to reduce over-fitting.
 
 ## Training
 
 To find weights that extract good features, weights are iteratively adjusted such that Agni best predicts the orientation of a given x-ray and orientation label pair. The extent to which a prediction is correct is measured using a loss function. Since our problem has two classes (frontal and lateral), we use binary cross-entropy loss. To adjust weights such that loss is minimised we use [Adam](https://arxiv.org/abs/1412.6980), a modern gradient descent optimiser.
 
-We visualise the training process using [tensorboard](https://www.tensorflow.org/get_started/summaries_and_tensorboard). 100 iterations/epochs of training were sufficient for our model to converge to a near zero valuation loss:
+We visualise the training process using [tensorboard](https://www.tensorflow.org/get_started/summaries_and_tensorboard) (as shown below). 100 iterations/epochs of training were sufficient for our model to converge to a near zero valuation loss:
 
 <p style="float: left; font-size: 9pt; text-align: center; width: 48%; margin-right: 1%; margin-bottom: 0.5em;">
   <img src="assets/acc.png" style="width: 100%"/>
@@ -94,27 +94,27 @@ Here is a confusion matrix of front vs side classifications:
 </tr>
 <tr>
   <td><p><b>Predicted frontal</b></p></td>
-  <td><p>50</p></td>
+  <td><p>21</p></td>
   <td><p>0</p></td>
 </tr>
 <tr>
   <td><p><b>Predicted lateral</b></p></td>
   <td><p>0</p></td>
-  <td><p>1</p></td>
+  <td><p>29</p></td>
 </tr>
 </table>
 
 ## Comparison to related work
 
-Previous work on front vs. side x-ray detection by [Rajkomar et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5267603/) used pretrained models to achieve near perfect accuracy. Our work is therefore comparable to previous work but is much simpler. Our model uses a total of 6 layers and a total of around 650 k parameters compared to previous work using Googlenet which uses 22 layers and a total of 6.7 M parameters. Agni is therefore both more memory and computationally efficient than previous approaches.
+Previous work on front vs. side x-ray detection by [Rajkomar et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5267603/) used pretrained models to achieve near perfect accuracy. Since our work achieves similar results it is comparable to previous work but is much simpler. Our model uses a total of 6 layers and a total of around 650 k parameters compared to previous work using Googlenet which uses 22 layers and a total of 6.7 M parameters. Agni is therefore both more memory and computationally efficient than previous approaches.
 
 # Code
 
-Our repo is arranged into source (`src`) and data (`data`) folders. The `src` folder has two files, one for training (`train_Agni.py`) and another for testing (`test_Agni.py`). Our code is writen in python using the Keras 2 deep learning framework. Please refer to the `README.md` file in the repo for further details.
+Our repo is arranged into source (`src`) and data (`data`) folders. The `src` folder has two files, one for training (`train_Agni.py`) and another for testing (`test_Agni.py`). Our code is written in python using the Keras 2 deep learning framework. Please refer to the `README.md` file in the repo for further details.
 
 # Future work
 
-Go ahead and mess around with our model parameters. See if you can delete some layers to make the model even simpler.
+Go ahead and play around with our model parameters. See if you can delete some layers to make the model even simpler.
 
 This project can easily be modified to become an arbitrary binary medical scan classifier (PET scan slides, MRIs slides, ...). Feel free to fork this project and classify your own data!
 
