@@ -2,6 +2,10 @@
 
 A simple x-ray classifier to differentiate front (frontal) vs side (lateral) x-rays.
 
+Developed at isazi Consulting.
+
+See our [blog post](https://isaziconsulting.github.io/XRayFrontSideDetection/) for a conceptual overview of this project.
+
 ## Requirements
 
 * numpy
